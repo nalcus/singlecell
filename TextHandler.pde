@@ -1,7 +1,7 @@
 // SingleCell
-// alpha build 0002
+// alpha build 0003
 // Copyright (c) 2014 Nicholas Alcus
-// see README.txt for details about this software.
+// see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
 // by applicable law.
 
@@ -42,12 +42,19 @@ class TextHandler
     fill(255);
   }
    
+  // display some text with a shadow
   void shadowText(String message, int x,int y) {
     fill(0);
     text(message, x+DEFAULT_SHADOW_DISTANCE,
       y+DEFAULT_SHADOW_DISTANCE);
     fill(255);
     text(message,x,y);
+  }
+  
+  // display some text of a specific color
+  void colorText(String message, int x, int y, color c) {
+    fill(c);
+    text(message, x, y);
   }
       
 }

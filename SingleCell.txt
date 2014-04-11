@@ -1,0 +1,13 @@
+SingleCell
+alpha build 0002
+Copyright (c) 2014 Nicholas Alcus
+It comes without any warranty, to the extent permitted by applicable law.
+
+Renders a single cell for use in simulations.
+The cell will accelerate toward the mouse cursor.
+Physics lines can be toggled with the upper or lower case 'L' key.
+The displayed lines are magnified for better visibility to the user.
+The red 'V' line indicates velocity and is magnified 10x.
+The green 'A' line indicates acceleration and is magnified 100x.
+
+Built with processing.
