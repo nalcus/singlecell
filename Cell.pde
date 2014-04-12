@@ -1,5 +1,5 @@
 // SingleCell
-// alpha build 0003
+// alpha build 0004
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
@@ -26,8 +26,8 @@ class Cell
         random(WINDOW_HEIGHT)); 
     }
     else {
-      position = new PVector(WINDOW_WIDTH/2,
-        WINDOW_HEIGHT/2); 
+      position = new PVector(WINDOW_WIDTH*0.5,
+        WINDOW_HEIGHT*0.5); 
     }
       
     velocity = new PVector(0,0); 
@@ -64,13 +64,18 @@ class Cell
   
   public void display()
   {
+        
     // render cell
     // in this version we'll draw a simple ellipse to represent our cell
+    // alpha: 0004 add a little pulse with Perlin noise.
     stroke(0);
     fill(192);
-    ellipse(position.x, position.y, size, size);
+    float sizePulse=map(noiseCache.getNoise(frames),0,1,size,size+(size*0.5));
+    ellipse(position.x, position.y, sizePulse, sizePulse);
+    
     // render physics lines
     if (showLines) {
+      
       // velocity line
       stroke (255,0,0);
       PVector velocityLine=new PVector(velocity.x,velocity.y);
@@ -80,6 +85,7 @@ class Cell
       textHandler.setTextToDefault();
       textHandler.colorText ("V",int(position.x+velocityLine.x),
         int(position.y+velocityLine.y), color(255,0,0));
+         
       // acceleration line
       stroke (0,255,0);
       PVector accelerationLine=new PVector(acceleration.x,acceleration.y);
@@ -89,7 +95,6 @@ class Cell
       textHandler.setTextToDefault();
       textHandler.colorText ("A",int(position.x+accelerationLine.x),
         int(position.y+accelerationLine.y), color(0,255,0));
-
     }
   }
   
