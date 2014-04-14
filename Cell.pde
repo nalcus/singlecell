@@ -1,5 +1,5 @@
 // SingleCell
-// alpha build 0004
+// alpha build 0005
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
@@ -10,6 +10,7 @@
 
 static final boolean RANDOM_POSITION=true; 
 static final float MAXIMUM_SPEED=2.0; 
+static final float INITIAL_SIZE=64.0;
 
 class Cell
 {
@@ -18,7 +19,7 @@ class Cell
   PVector acceleration; // change in velocity
   PVector goal; // where it wants to go
   
-  int size; // how big it is
+  float size; // how big it is
   
   Cell() {
     if (RANDOM_POSITION) {
@@ -67,12 +68,33 @@ class Cell
         
     // render cell
     // in this version we'll draw a simple ellipse to represent our cell
-    // alpha: 0004 add a little pulse with Perlin noise.
-    stroke(0);
-    fill(192);
+    // alpha 0004: add a little pulse with Perlin noise.
+    // alpha 0005: show the velocity   
+    noStroke();
+    
+    // outer halo
     float sizePulse=map(noiseCache.getNoise(frames),0,1,size,size+(size*0.5));
+    fill(192,16);
     ellipse(position.x, position.y, sizePulse, sizePulse);
     
+    // shell
+    fill(192,192);
+    ellipse(position.x, position.y, size, size);
+    
+    
+    // velocity indicating layer
+    fill(255,128);
+    float smaller=size*0.75;
+    ellipse(position.x+velocity.x, position.y+velocity.y, 
+    smaller, smaller);
+    
+    // acceleration indicating nucleus
+    fill(255,64,0,64);
+    float evenSmaller=size*0.3;
+    PVector nukePosition= new PVector((50.0*acceleration.x)+position.x,
+      (50.0*acceleration.y)+position.y);    
+    ellipse(nukePosition.x, nukePosition.y, evenSmaller, evenSmaller);
+
     // render physics lines
     if (showLines) {
       
@@ -83,7 +105,7 @@ class Cell
       line(position.x,position.y,
         position.x+velocityLine.x, position.y+velocityLine.y);
       textHandler.setTextToDefault();
-      textHandler.colorText ("V",int(position.x+velocityLine.x),
+      textHandler.colorText ("Vel",int(position.x+velocityLine.x),
         int(position.y+velocityLine.y), color(255,0,0));
          
       // acceleration line
@@ -93,7 +115,7 @@ class Cell
       line(position.x,position.y,
         position.x+accelerationLine.x, position.y+accelerationLine.y);
       textHandler.setTextToDefault();
-      textHandler.colorText ("A",int(position.x+accelerationLine.x),
+      textHandler.colorText ("Acc",int(position.x+accelerationLine.x),
         int(position.y+accelerationLine.y), color(0,255,0));
     }
   }

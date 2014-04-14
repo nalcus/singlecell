@@ -1,5 +1,5 @@
 // SingleCell
-// alpha build 0004
+// alpha build 0005
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
@@ -58,12 +58,10 @@ void draw() {
   // render instructional text
   textHandler.setTextToDefault();
   textAlign(RIGHT);
-  textHandler.shadowText( "The cell will accelerate toward the mouse cursor.",
-    WINDOW_WIDTH-10, WINDOW_HEIGHT-50);
-  textHandler.shadowText( "Its current goal is: [" + mouseX + ", " + mouseY+"]",
-    WINDOW_WIDTH-10, WINDOW_HEIGHT-30);
-      textHandler.shadowText( "Press the 'L' key to toggle physics lines display.",
+
+  textHandler.shadowText( "Current goal :[" + mouseX + ", " + mouseY+"]",
     WINDOW_WIDTH-10, WINDOW_HEIGHT-10);
+
 }
 
 void keyPressed() {
