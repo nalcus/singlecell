@@ -1,5 +1,5 @@
 // SingleCell
-// alpha build 0005
+// alpha build 0006
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 

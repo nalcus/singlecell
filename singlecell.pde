@@ -1,12 +1,12 @@
 // SingleCell
-// alpha build 0005
+// alpha build 0006
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
 // by applicable law.
 
-static final int WINDOW_WIDTH = 640;
-static final int WINDOW_HEIGHT = 480;
+static final int WINDOW_WIDTH = 1280;
+static final int WINDOW_HEIGHT = 720;
 static final int FRAMERATE = 60;
 
 boolean showLines;
@@ -15,7 +15,7 @@ int frames;
 
 NoiseCache noiseCache;
 TextHandler textHandler;
-Cell cell;
+Agent cell;
 
 void setup() {
   size (WINDOW_WIDTH, WINDOW_HEIGHT);

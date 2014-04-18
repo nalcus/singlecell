@@ -1,5 +1,5 @@
 // SingleCell
-// alpha build 0005
+// alpha build 0006
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
@@ -9,19 +9,14 @@
 // class definition for a cell.
 
 static final boolean RANDOM_POSITION=true; 
-static final float MAXIMUM_SPEED=2.0; 
-static final float INITIAL_SIZE=64.0;
+static final float INITIAL_MASS=64.0;
 
-class Cell
+class Cell extends Agent
 {
-  PVector position; // where it is
-  PVector velocity; // how fast its going
-  PVector acceleration; // change in velocity
-  PVector goal; // where it wants to go
-  
-  float size; // how big it is
   
   Cell() {
+    super();
+    
     if (RANDOM_POSITION) {
       position = new PVector(random(WINDOW_WIDTH),
         random(WINDOW_HEIGHT)); 
@@ -35,33 +30,17 @@ class Cell
     acceleration = new PVector(0,0);
     goal=new PVector(position.x,position.y);
     
-    size = 48;
+    mass = INITIAL_MASS;    
   }
   
-  public void setGoal(int x_, int y_) {
-    goal.x=x_;
-    goal.y=y_;
-  }
   
+/*
   public void update()
   {
-    // move cell toward goal
-    
-    // in this version we're going to add fixed acceleration
-    // in the direction of the mouse cursor
-    acceleration.mult(0.0);
-    acceleration.add(position);
-    acceleration.sub(goal);
-    acceleration.limit(0.1);
-    acceleration.mult(-1.0);
-    
-    // add accleration to velocity
-    velocity.add(acceleration);
-    // limit velocity by max speed
-    velocity.limit(MAXIMUM_SPEED);
-    // translate position by velocity
-    position.add(velocity);
+    super.update();
   }
+  */
+  
   
   public void display()
   {
@@ -70,11 +49,13 @@ class Cell
     // in this version we'll draw a simple ellipse to represent our cell
     // alpha 0004: add a little pulse with Perlin noise.
     // alpha 0005: show the velocity   
-    noStroke();
+    float size = mass; 
     
     // outer halo
     float sizePulse=map(noiseCache.getNoise(frames),0,1,size,size+(size*0.5));
     fill(192,16);
+    
+     noStroke();
     ellipse(position.x, position.y, sizePulse, sizePulse);
     
     // shell

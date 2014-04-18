@@ -1,5 +1,5 @@
 SingleCell
-alpha build 0005
+alpha build 0006
 Copyright (c) 2014 Nicholas Alcus
 It comes without any warranty, to the extent permitted by applicable law.
 
