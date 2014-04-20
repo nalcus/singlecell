@@ -1,11 +1,11 @@
 // SingleCell
-// alpha build 0006
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
 // by applicable law.
 
 // NoiseCache.pde
+// file version: a0007
 // Cache some Perlin noise to save processor juice at runtime.
 
 static final float DEFAULT_INTERVAL = 0.01;

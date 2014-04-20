@@ -1,11 +1,11 @@
 // SingleCell
-// alpha build 0006
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
 // by applicable law.
 
 // Agent.pde
+// file version: a0007
 // class definition for an agent. Everything on our main stage will be an agent.
 
 static final float AGENT_MAXIMUM_VELOCITY=2.0; 

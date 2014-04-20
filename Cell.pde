@@ -1,11 +1,11 @@
 // SingleCell
-// alpha build 0006
 // Copyright (c) 2014 Nicholas Alcus
 // see README.txt or SingleCell.txt for details about this software.
 // It comes without any warranty, to the extent permitted 
 // by applicable law.
 
 // Cell.pde
+// file version: a0007
 // class definition for a cell.
 
 static final boolean RANDOM_POSITION=true; 
@@ -52,7 +52,7 @@ class Cell extends Agent
     float size = mass; 
     
     // outer halo
-    float sizePulse=map(noiseCache.getNoise(frames),0,1,size,size+(size*0.5));
+    float sizePulse=map(noiseCache.getNoise(timer.getFrames()),0,1,size,size+(size*0.5));
     fill(192,16);
     
      noStroke();
