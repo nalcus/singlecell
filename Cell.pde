@@ -5,11 +5,11 @@
 // by applicable law.
 
 // Cell.pde
-// file version: a0007
+// file version: a0009
 // class definition for a cell.
 
 static final boolean RANDOM_POSITION=true; 
-static final float INITIAL_MASS=64.0;
+static final float INITIAL_MASS=48.0;
 
 class Cell extends Agent
 {
@@ -30,7 +30,8 @@ class Cell extends Agent
     acceleration = new PVector(0,0);
     goal=new PVector(position.x,position.y);
     
-    mass = INITIAL_MASS;    
+    mass = INITIAL_MASS;  
+    flocking = true;  
   }
   
   
@@ -52,10 +53,10 @@ class Cell extends Agent
     float size = mass; 
     
     // outer halo
-    float sizePulse=map(noiseCache.getNoise(timer.getFrames()),0,1,size,size+(size*0.5));
+    float sizePulse=map(noiseCache.getNoise(framesAlive),0,1,size,size+(size*0.5));
     fill(192,16);
     
-     noStroke();
+    noStroke();
     ellipse(position.x, position.y, sizePulse, sizePulse);
     
     // shell
@@ -72,9 +73,11 @@ class Cell extends Agent
     // acceleration indicating nucleus
     fill(255,64,0,64);
     float evenSmaller=size*0.3;
-    PVector nukePosition= new PVector((50.0*acceleration.x)+position.x,
-      (50.0*acceleration.y)+position.y);    
-    ellipse(nukePosition.x, nukePosition.y, evenSmaller, evenSmaller);
+    PVector nucleus = new PVector(acceleration.x,acceleration.y);
+    nucleus.mult(100.0);
+    nucleus.limit(5.0);
+    nucleus.add(position);
+    ellipse(nucleus.x, nucleus.y, evenSmaller, evenSmaller);
 
     // render physics lines
     if (showLines) {

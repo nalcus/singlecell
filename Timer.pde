@@ -5,9 +5,10 @@
 // by applicable law.
 
 // Timer.pde
-// file version: a0001
+// file version: a0002
 // class definition for timer.
 // handles timing related tasks.
+// internally uses java nanosecond timer
 
 class Timer {
   int frames;
@@ -26,7 +27,7 @@ class Timer {
   }
   
   void resetTime() {
-    startTime=millis();
+    startTime=rightNowNano();
     lastTime=startTime;
     currentTime=lastTime;
     frameTime=0.0;
@@ -34,7 +35,7 @@ class Timer {
   
   void updateTime() {
     lastTime=currentTime;
-    currentTime=millis();
+    currentTime=rightNowNano();
     frameTime=currentTime-lastTime;
   }
   
@@ -52,8 +53,16 @@ class Timer {
     return frames;
   }
   
-  float getFrameTime() {
+  float getFrameTimeNano() {
     return frameTime;
+  }
+  
+  float getFrameTimeMillis() {
+    return frameTime*.000001;
+  }
+  
+  float rightNowNano() {
+    return System.nanoTime();
   }
 }
 

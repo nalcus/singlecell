@@ -5,7 +5,7 @@
 // by applicable law.
 
 // singlecell.pde
-// file version: a0007
+// file version: a0009
 // Main single cell application
 
 
@@ -17,8 +17,8 @@ boolean showLines;
 
 NoiseCache noiseCache;
 TextHandler textHandler;
-Agent cell;
-Timer timer;
+Sim sim;
+
 
 void setup() {
   size (WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -27,44 +27,18 @@ void setup() {
   
   noiseCache = new NoiseCache();
   textHandler=new TextHandler();
-  cell = new Cell();
-  timer = new Timer();
+  sim = new Sim();
   
   // default to not showing lines
   showLines=false;
+  
 }
 
 void draw() {
-  //iterate frames. the first frame that is actually rendered is frame 1.
-  timer.newFrame();
-  
-  //grey background
-  background (128); 
-  
- // set cell goal to mouse cursor 
-  cell.setGoal(mouseX, mouseY);
-  
-  // update cell math & AI
-  cell.update();
-  
-  // render cell
-  cell.display();
-  
-  // render title text
-  textHandler.setTextToTitle();
-  textHandler.shadowText("SingleCell",10,24); 
-  textHandler.setTextToSubtitle();
-  textHandler.shadowText("Copyright 2014 Nicholas Alcus",10,48);
-  
-  // render instructional text
-  textHandler.setTextToDefault();
-  textAlign(RIGHT);
 
-    textHandler.shadowText( "Frame Time :"+(int)timer.getFrameTime()+"ms",
-    WINDOW_WIDTH-10, WINDOW_HEIGHT-30);
-  
-  textHandler.shadowText( "Current goal :[" + mouseX + ", " + mouseY+"]",
-    WINDOW_WIDTH-10, WINDOW_HEIGHT-10);
+  sim.update();
+  sim.display();
+
 
 }
 

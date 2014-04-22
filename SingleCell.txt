@@ -1,5 +1,5 @@
 SingleCell
-alpha build 0007
+alpha build 0010
 Copyright (c) 2014 Nicholas Alcus
 It comes without any warranty, to the extent permitted by applicable law.
 
@@ -17,12 +17,15 @@ Built with processing.
 
 Changlelog:
 
+alpha 0010:
+- Multiple cells. 
+
 alpha 0007:
-- added Timer class and frametime display. Changed sourcefile version numbering to a per-file basis.
+- Added Timer class and frametime display. Changed sourcefile version numbering to a per-file basis.
 
 alpha 0006:
--added generic Agent class. Cell is now a child class that inherits from Agent. 
+- Added generic Agent class. Cell is now a child class that inherits from Agent. 
   This will allow us to create Agents of other forms later for a more diverse simulation. 
 
 alpha 0005:
--update cell visual presentation. velocity and acceleration are now displayed more organically.
+- Updated cell visual presentation. velocity and acceleration are now displayed more organically.
