@@ -5,12 +5,12 @@
 // by applicable law.
 
 // singlecell.pde
-// file version: a0009
+// file version: a0012
 // Main single cell application
 
 
-static final int WINDOW_WIDTH = 1280;
-static final int WINDOW_HEIGHT = 720;
+static final int WINDOW_WIDTH = 600;
+static final int WINDOW_HEIGHT = 600;
 static final int FRAMERATE = 60;
 
 boolean showLines;
@@ -48,4 +48,9 @@ void keyPressed() {
     // toggle display of physics lines
     showLines=!showLines;
   }
+}
+
+// calculation the square root is costly. for most purposes we don't even need it!
+float distance_squared (float x1, float y1, float x2,float y2) {
+  return ((x2-x1)*(x2-x1))+((y2-y1)*(y2-y1));
 }

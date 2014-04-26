@@ -5,7 +5,7 @@
 // by applicable law.
 
 // Cell.pde
-// file version: a0009
+// file version: a0012
 // class definition for a cell.
 
 static final boolean RANDOM_POSITION=true; 
@@ -30,17 +30,18 @@ class Cell extends Agent
     acceleration = new PVector(0,0);
     goal=new PVector(position.x,position.y);
     
-    mass = INITIAL_MASS;  
+    mass = INITIAL_MASS*(0.5+(random(0.5)));  
     flocking = true;  
   }
   
   
-/*
-  public void update()
+
+  public void update(ArrayList<Agent> otherAgents)
   {
-    super.update();
+    
+    super.update(otherAgents);
   }
-  */
+
   
   
   public void display()
@@ -53,11 +54,11 @@ class Cell extends Agent
     float size = mass; 
     
     // outer halo
-    float sizePulse=map(noiseCache.getNoise(framesAlive),0,1,size,size+(size*0.5));
+    //float sizePulse=map(noiseCache.getNoise(framesAlive),0,1,size,size+(size*0.5));
     fill(192,16);
     
     noStroke();
-    ellipse(position.x, position.y, sizePulse, sizePulse);
+    //ellipse(position.x, position.y, sizePulse, sizePulse);
     
     // shell
     fill(192,192);

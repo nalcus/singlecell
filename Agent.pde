@@ -5,11 +5,12 @@
 // by applicable law.
 
 // Agent.pde
-// file version: a0010
+// file version: a0012
 // class definition for an agent. Everything on our main stage will be an agent.
 
 static final float AGENT_MAXIMUM_VELOCITY=4.0; 
 static final float IDEAL_SEPARATION=75.0;
+static final float IDEAL_SEPARATION_SQUARED=IDEAL_SEPARATION*IDEAL_SEPARATION;
 static final float SEPARATION_SCALAR=75.0;
 static final float ARRIVAL_RADIUS=50.0;
 
@@ -25,6 +26,8 @@ class Agent
   int framesAlive; // lifespan in frames
   
   boolean flocking; // is this agent counted in flocking behaviors?
+  boolean attractive; // does it draw other agents to it?
+  boolean hasGoal; // does it have a goal?
 
   Agent() {
     position = new PVector(0, 0);
@@ -35,9 +38,11 @@ class Agent
     mass=0.00001; // [nothing has zero mass]
     framesAlive=0;
     flocking=false;
+    attractive=false;
+    hasGoal=false;
   } 
 
-  public void setGoal(int x_, int y_) {
+  public void setGoal(float x_, float y_) {
     goal.x=x_;
     goal.y=y_;
   }
@@ -63,7 +68,6 @@ class Agent
     PVector steering_force = new PVector(velocity.x, velocity.y);
     steering_force.sub(desired_velocity);
     steering_force.limit(AGENT_MAXIMUM_VELOCITY);
-    //float distance=PVector.dist(target,position)
     applyForce(steering_force);
     
     
@@ -82,12 +86,15 @@ class Agent
     applyForce(resistance_force);
   }  
 
+
   public void update(ArrayList<Agent> otherAgents) {
     // iterate frame count
     framesAlive++;
         
     // move agent toward goal
+    if (hasGoal) {
     seek(goal);
+    }    
     
     // separate from other agents
     if (flocking) {
@@ -129,13 +136,13 @@ class Agent
     for (Agent otherAgent : otherAgents) {
       // get the distance to each other agent
       if (otherAgent.flocking) {
-        float distance = PVector.dist(position, otherAgent.position);
-        if ((distance>0) && (distance < IDEAL_SEPARATION)) {
+        float square_distance = distance_squared(position.x,position.y, otherAgent.position.x,otherAgent.position.y);
+        if ((square_distance>0) && (square_distance < IDEAL_SEPARATION_SQUARED)) {
           count++;
           PVector difference = new PVector(position.x,position.y);
           difference.sub(otherAgent.position);
           difference.normalize();
-          difference.div(distance);
+          difference.div((float)Math.sqrt(square_distance));
           steering_force.add(difference);
         }
       }

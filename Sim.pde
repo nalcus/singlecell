@@ -5,10 +5,11 @@
 // by applicable law.
 
 // Sim.pde
-// file version: a0004
+// file version: a0011
 // class definition for a simulation.
 
 static final float AMBIENT_RESISTANCE = 0.5;
+static final int DEFAULT_POPULATION = 1;
 
 class Sim
 {
@@ -16,13 +17,12 @@ class Sim
   Timer timer;
 
   Sim () {
+    int totalPopulation=(int)((WINDOW_WIDTH*WINDOW_HEIGHT)/(INITIAL_MASS*INITIAL_MASS));
     agents = new ArrayList<Agent>();
+    agents.add(new Emitter());
+    for (int i=0;i<totalPopulation;i++) {
     agents.add(new Cell());
-    agents.add(new Cell());
-    agents.add(new Cell());
-    agents.add(new Cell());    
-    agents.add(new Cell());
-    agents.add(new Cell());
+    }
     timer = new Timer();
   }
 
@@ -31,7 +31,7 @@ class Sim
     timer.newFrame();
 
     for (Agent agent : agents) {     
-      agent.setGoal(mouseX, mouseY);
+      //agent.setGoal(mouseX, mouseY);
       agent.update(agents);
     }
   }
