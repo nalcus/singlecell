@@ -5,7 +5,7 @@
 // by applicable law.
 
 // Sim.pde
-// file version: a0011
+// file version: a0013
 // class definition for a simulation.
 
 static final float AMBIENT_RESISTANCE = 0.5;
@@ -21,7 +21,7 @@ class Sim
     agents = new ArrayList<Agent>();
     agents.add(new Emitter());
     for (int i=0;i<totalPopulation;i++) {
-    agents.add(new Cell());
+      agents.add(new Cell());
     }
     timer = new Timer();
   }
@@ -47,22 +47,31 @@ class Sim
       agent.display();
     }
 
+    // render all text
+
+    // clear text buffer
+    textHandler.clearTextOverlay();
+
     // render title text
     textHandler.setTextToTitle();
-    textHandler.shadowText("SingleCell", 10, 24); 
+    textHandler.shadowText("Single", 10, 24, 255);
+    
+    
+    textHandler.shadowText("Cell", 75, 24, 255);
     textHandler.setTextToSubtitle();
-    textHandler.shadowText("Copyright 2014 Nicholas Alcus", 10, 48);
+    textHandler.shadowText("Copyright 2014 Nicholas Alcus", 10, 48, 255);
 
     // render instructional text
     textHandler.setTextToDefault();
-    textAlign(RIGHT);
+    textHandler.alignRight();
 
     textHandler.shadowText( "Frame Time :"+ nf(timer.getFrameTimeMillis(), 1, 3)+" ms", 
-    WINDOW_WIDTH-10, WINDOW_HEIGHT-30);
+    WINDOW_WIDTH-10, WINDOW_HEIGHT-30, 255);
 
     textHandler.shadowText( "Current goal :[" + mouseX + ", " + mouseY+"]", 
-    WINDOW_WIDTH-10, WINDOW_HEIGHT-10);
-    ;
+    WINDOW_WIDTH-10, WINDOW_HEIGHT-10, 255);
+
+    textHandler.renderTextOverlay();
   }
 }
 

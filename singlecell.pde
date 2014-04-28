@@ -5,7 +5,7 @@
 // by applicable law.
 
 // singlecell.pde
-// file version: a0012
+// file version: a0013
 // Main single cell application
 
 
@@ -21,7 +21,7 @@ Sim sim;
 
 
 void setup() {
-  size (WINDOW_WIDTH, WINDOW_HEIGHT);
+  size (WINDOW_WIDTH, WINDOW_HEIGHT, P3D);
   frameRate (FRAMERATE);
   smooth();
   
@@ -38,8 +38,6 @@ void draw() {
 
   sim.update();
   sim.display();
-
-
 }
 
 void keyPressed() {

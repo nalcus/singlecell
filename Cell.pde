@@ -5,7 +5,7 @@
 // by applicable law.
 
 // Cell.pde
-// file version: a0012
+// file version: a0013
 // class definition for a cell.
 
 static final boolean RANDOM_POSITION=true; 
@@ -82,16 +82,12 @@ class Cell extends Agent
 
     // render physics lines
     if (showLines) {
-      
       // velocity line
       stroke (255,0,0);
       PVector velocityLine=new PVector(velocity.x,velocity.y);
       velocityLine.mult(10);
       line(position.x,position.y,
         position.x+velocityLine.x, position.y+velocityLine.y);
-      textHandler.setTextToDefault();
-      textHandler.colorText ("Vel",int(position.x+velocityLine.x),
-        int(position.y+velocityLine.y), color(255,0,0));
          
       // acceleration line
       stroke (0,255,0);
@@ -99,9 +95,6 @@ class Cell extends Agent
       accelerationLine.mult(100);
       line(position.x,position.y,
         position.x+accelerationLine.x, position.y+accelerationLine.y);
-      textHandler.setTextToDefault();
-      textHandler.colorText ("Acc",int(position.x+accelerationLine.x),
-        int(position.y+accelerationLine.y), color(0,255,0));
     }
   }
   
